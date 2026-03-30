@@ -1,5 +1,5 @@
 void main() {
-  (int a, int b) val = (1, 100);
+  (int a, int b) val = (1, -100);
 
   switch (val) {
     case (1, _) when val.$2 > 0:
