@@ -22,116 +22,136 @@ class MyAppTest extends StatelessWidget {
           onPressed: () => print('FloatingActionButton 클릭됨'),
           child: Text('클릭'),
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Text(
-                '오늘 점심 뭐 먹죠?',
-                style: TextStyle(
-                  fontSize: 50.0,               // 글자 크기
-                  fontWeight: FontWeight.w700,  // 글자 굵기
-                  color: Colors.blue,           // 글자 색상
-                ),
-              ),
-            ),
-            // TextButton
-            Center(
-              child: TextButton(
-                // 이벤트 리스너를 등록하기, 나중에 클릭시 동작하는 함수를 입력 할 예정.
-                onPressed: () {},
-                // 버튼의 스타일을 구성.
-                style: TextButton.styleFrom(foregroundColor: Colors.red),
-                // 버튼의 라벨
-                child: Text('텍스트 버튼'),
-              ),
-            ),
-            // OutlinedButton
-            Center(
-              child: OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
-                child: Text('아웃라인드 버튼'),
-              ),
-            ),
-            // ElevatedButton
-            Center(
-              child: ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-                child: Text('엘리베이티드 버튼'),
-              ),
-            ),
-            // IconButton
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Center(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.favorite),
-                    // 아이콘 목록: https://fonts.google.com/icons
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Text(
+                  '오늘 점심 뭐 먹죠?',
+                  style: TextStyle(
+                    fontSize: 50.0,               // 글자 크기
+                    fontWeight: FontWeight.w700,  // 글자 굵기
+                    color: Colors.blue,           // 글자 색상
                   ),
                 ),
-                Center(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.bolt),
-                    // 아이콘 목록: https://fonts.google.com/icons
-                  ),
-                ),
-                Center(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.logout),
-                    // 아이콘 목록: https://fonts.google.com/icons
-                  ),
-                ),
-              ],
-            ),
-            // GestureDetector
-            Center(
-              child: GestureDetector(
-                // 기본 옵션1
-                onTap: () => print('on tap'),
-                onDoubleTap: () => print('on double tap'),
-                onLongPress: () => print('on long press'),
-
-                // 기본 옵션2
-                // 샘플 추가 옵션 확인.
-                // 👇 여기에 자유 드래그(Pan) 옵션을 추가합니다.
-                // onPanStart: (details) {
-                //   print('드래그 시작! 위치: ${details.globalPosition}');
-                // },
-                // onPanUpdate: (details) {
-                //   // details.delta를 통해 손가락이 움직인 거리를 알 수 있습니다.
-                //   print('드래그 중... 이동 거리: ${details.delta}');
-                // },
-                // onPanEnd: (details) {
-                //   print('드래그 종료!');
-                // },
-
-                // 기본 옵션 3
-                // 실물 기기로, 두손가락으로 탭을 해서, 늘리거나, 줄이기 작업.
-                // 👇 Pan 대신 확대/축소(Scale) 옵션을 추가합니다.
-                // onScaleStart: (details) {
-                //   print('확대/축소 시작!');
-                // },
-                // onScaleUpdate: (details) {
-                //   // details.scale 값이 1.0보다 크면 확대, 작으면 축소입니다.
-                //   print('확대/축소 중... 현재 배율: ${details.scale}');
-                // },
-                // onScaleEnd: (details) {
-                //   print('확대/축소 종료!');
-                // },
-                child: Container( // 임의의 빨간 박스 넣었다 대신에, 텍스트, 버튼, 다른  UI 가능.
-                  decoration: BoxDecoration(color: Colors.red),
-                  width: 100.0,
-                  height: 100.0,
+              ),
+              // TextButton
+              Center(
+                child: TextButton(
+                  // 이벤트 리스너를 등록하기, 나중에 클릭시 동작하는 함수를 입력 할 예정.
+                  onPressed: () {},
+                  // 버튼의 스타일을 구성.
+                  style: TextButton.styleFrom(foregroundColor: Colors.red),
+                  // 버튼의 라벨
+                  child: Text('텍스트 버튼'),
                 ),
               ),
-            )
-          ],
+              // OutlinedButton
+              Center(
+                child: OutlinedButton(
+                  onPressed: () {},
+                  style: OutlinedButton.styleFrom(foregroundColor: Colors.red),
+                  child: Text('아웃라인드 버튼'),
+                ),
+              ),
+              // ElevatedButton
+              Center(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  child: Text('엘리베이티드 버튼'),
+                ),
+              ),
+              // IconButton
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Center(
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.favorite),
+                      // 아이콘 목록: https://fonts.google.com/icons
+                    ),
+                  ),
+                  Center(
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.bolt),
+                      // 아이콘 목록: https://fonts.google.com/icons
+                    ),
+                  ),
+                  Center(
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.logout),
+                      // 아이콘 목록: https://fonts.google.com/icons
+                    ),
+                  ),
+                ],
+              ),
+              // GestureDetector
+              Center(
+                child: GestureDetector(
+                  // 기본 옵션1
+                  onTap: () => print('on tap'),
+                  onDoubleTap: () => print('on double tap'),
+                  onLongPress: () => print('on long press'),
+          
+                  // 기본 옵션2
+                  // 샘플 추가 옵션 확인.
+                  // 👇 여기에 자유 드래그(Pan) 옵션을 추가합니다.
+                  // onPanStart: (details) {
+                  //   print('드래그 시작! 위치: ${details.globalPosition}');
+                  // },
+                  // onPanUpdate: (details) {
+                  //   // details.delta를 통해 손가락이 움직인 거리를 알 수 있습니다.
+                  //   print('드래그 중... 이동 거리: ${details.delta}');
+                  // },
+                  // onPanEnd: (details) {
+                  //   print('드래그 종료!');
+                  // },
+          
+                  // 기본 옵션 3
+                  // 실물 기기로, 두손가락으로 탭을 해서, 늘리거나, 줄이기 작업.
+                  // 👇 Pan 대신 확대/축소(Scale) 옵션을 추가합니다.
+                  // onScaleStart: (details) {
+                  //   print('확대/축소 시작!');
+                  // },
+                  // onScaleUpdate: (details) {
+                  //   // details.scale 값이 1.0보다 크면 확대, 작으면 축소입니다.
+                  //   print('확대/축소 중... 현재 배율: ${details.scale}');
+                  // },
+                  // onScaleEnd: (details) {
+                  //   print('확대/축소 종료!');
+                  // },
+                  child: Container( // 임의의 빨간 박스 넣었다 대신에, 텍스트, 버튼, 다른  UI 가능.
+                    decoration: BoxDecoration(color: Colors.red),
+                    width: 100.0,
+                    height: 100.0,
+                  ),
+                ),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  border: Border.all(width: 16.0, color: Colors.black),
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                height: 200.0,
+                width: 100.0,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  border: Border.all(width: 16.0, color: Colors.black),
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                height: 200.0,
+                width: 100.0,
+              )
+            ],
+          ),
         ),
       ),
     );
