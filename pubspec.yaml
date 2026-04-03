@@ -34,6 +34,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  #추가
+  http: ^1.1.0        # REST API 호출
+  dio: ^5.3.3         # 고급 HTTP 클라이언트 (선택)
 
 dev_dependencies:
   flutter_test:

@@ -66,7 +66,7 @@ class _AccordionNavScreenState extends State<AccordionNavScreen> {
             },
             itemBuilder: (context) => [
               const PopupMenuItem(value: '로그인', child: Text('회원로그인')),
-              const PopupMenuItem(value: '추즉', child: Text('관심상품')),
+              const PopupMenuItem(value: '관심상품', child: Text('관심상품')),
               const PopupMenuItem(value: '설정', child: Text('설정')),
               const PopupMenuDivider(), // 구분선
               const PopupMenuItem(value: '로그아웃', child: Text('로그아웃')),
@@ -96,6 +96,7 @@ class _AccordionNavScreenState extends State<AccordionNavScreen> {
                     '사용자님',
                     style: TextStyle(color: Colors.white, fontSize: 16),
                   ),
+                  const SizedBox(height: 8),
                   Text(
                     'user@example.com',
                     style: TextStyle(color: Colors.white.withOpacity(0.8)),
@@ -113,6 +114,13 @@ class _AccordionNavScreenState extends State<AccordionNavScreen> {
               },
             ),
             // 아코디언 메뉴 목록
+            // ... 의미 : 개별 요소로 분해하는 (spread연산자.)
+            // _menuItems 3개가 펼쳐져서 ListTile 3개로 변환해줌.
+            //  NavMenuItem(
+            //       title: '상품',
+            //       icon: Icons.shopping_bag,
+            //       subItems: ['전체 상품', '신상품', '인기상품', '할인상품'],
+            //     ),
             ..._menuItems.map((menuItem) {
               return ExpansionTile(
                 leading: Icon(menuItem.icon), // 메뉴 아이콘
