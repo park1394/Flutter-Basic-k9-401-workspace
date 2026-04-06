@@ -1,3 +1,4 @@
+import 'package:busanit_401_k9_flutter_project/screen/basic3-http/_3_news_api/screens/news_detail_screen.dart';
 import 'package:flutter/material.dart';
 import '../models/news_article.dart';
 import '../services/news_service.dart';
@@ -125,12 +126,10 @@ class _NewsScreenState extends State<NewsScreen> {
                       clipBehavior: Clip.antiAlias,
                       child: InkWell(
                         onTap: () {
-                          // url_launcher 패키지로 교체하면 실제 브라우저 열기 가능
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(article.url),
-                              duration: const Duration(seconds: 2),
-                            ),
+                          // 상세화면으로 데이터 가지고 이동하기.
+                          Navigator.push(context, // 알아두기, 따로 , 라우팅 하는 방법
+                              MaterialPageRoute(
+                                  builder: (context) => NewsDetailScreen(article: article))
                           );
                         },
                         child: Row(
