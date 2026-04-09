@@ -195,6 +195,12 @@ class _DbBasicScreenState extends State<DbBasicScreen> {
         )
             : const Text('내부 DB 기초'),
         actions: [
+          // ✅ 더미 데이터 생성 버튼
+          IconButton(
+            icon: const Icon(Icons.data_array),
+            tooltip: '더미 데이터 생성',
+            onPressed: _showDummyDialog,
+          ),
           IconButton(
             icon: Icon(_showSearch ? Icons.close : Icons.search),
             onPressed: () {
@@ -328,11 +334,108 @@ class _DbBasicScreenState extends State<DbBasicScreen> {
       ),
 
       // ── 추가 버튼 (FAB) ────────────────────────────────
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => _showNoteDialog(),
-        tooltip: '노트 추가',
-        child: const Icon(Icons.add),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 40.0),
+        child: FloatingActionButton(
+          onPressed: () => _showNoteDialog(),
+          tooltip: '노트 추가',
+          child: const Icon(Icons.add),
+        ),
       ),
     );
+  }
+
+  // _DbBasicScreenState 안에 추가
+
+  /// 더미 데이터 삽입 확인 다이얼로그
+  Future<void> _showDummyDialog() async {
+    int selectedCount = 30; // 기본값
+
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (ctx) => StatefulBuilder(
+        builder: (ctx, setDlg) => AlertDialog(
+          title: const Row(
+            children: [
+              Icon(Icons.data_array, color: Colors.green),
+              SizedBox(width: 8),
+              Text('더미 데이터 생성'),
+            ],
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('삽입할 더미 노트 건수를 선택하세요.'),
+              const SizedBox(height: 16),
+              // 건수 선택 드롭다운
+              DropdownButtonFormField<int>(
+                value: selectedCount,
+                decoration: const InputDecoration(
+                  labelText: '건수',
+                  border: OutlineInputBorder(),
+                ),
+                items: const [
+                  DropdownMenuItem(value: 10,  child: Text('10건')),
+                  DropdownMenuItem(value: 30,  child: Text('30건')),
+                  DropdownMenuItem(value: 50,  child: Text('50건')),
+                  DropdownMenuItem(value: 100, child: Text('100건')),
+                ],
+                onChanged: (v) => setDlg(() => selectedCount = v!),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text('취소'),
+            ),
+            ElevatedButton.icon(
+              icon: const Icon(Icons.bolt),
+              label: const Text('생성'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                foregroundColor: Colors.white,
+              ),
+              onPressed: () => Navigator.pop(ctx, true),
+            ),
+          ],
+        ),
+      ),
+    );
+
+    if (confirmed != true || !mounted) return;
+
+    // 로딩 표시
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Row(
+          children: [
+            const SizedBox(
+              width: 18, height: 18,
+              child: CircularProgressIndicator(
+                  strokeWidth: 2, color: Colors.white),
+            ),
+            const SizedBox(width: 12),
+            Text('더미 데이터 $selectedCount건 생성 중...'),
+          ],
+        ),
+        duration: const Duration(seconds: 10),
+      ),
+    );
+
+    await _db.insertDummyNotes(count: selectedCount);
+
+    if (!mounted) return;
+    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('✅ 더미 데이터 $selectedCount건이 추가되었습니다.'),
+        backgroundColor: Colors.green,
+      ),
+    );
+
+    _currentPage = 0; // 첫 페이지로 이동
+    _load();
   }
 }

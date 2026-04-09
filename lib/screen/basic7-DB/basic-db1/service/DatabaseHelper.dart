@@ -88,4 +88,44 @@ class DatabaseHelper {
     final db = await database;
     return db.delete('notes', where: 'id = ?', whereArgs: [id]);
   }
+
+  // service/DatabaseHelper.dart 에 추가
+
+  /// 더미 데이터 일괄 삽입 (트랜잭션 활용)
+  Future<void> insertDummyNotes({int count = 30}) async {
+    const categories = ['업무', '개인', '학습', '쇼핑', '여행'];
+    const bodies = [
+      'Flutter 위젯 공부하기',
+      '장보기 목록 정리',
+      '프로젝트 일정 확인',
+      '독서 30분',
+      '운동 계획 세우기',
+      '회의 자료 준비',
+      '이메일 확인 및 답장',
+      'GitHub 커밋 정리',
+      '주간 보고서 작성',
+      '코드 리뷰 진행',
+    ];
+
+    final db = await database;
+    final now = DateTime.now();
+
+    // 트랜잭션: 여러 INSERT를 하나의 작업으로 묶어 성능 향상
+    await db.transaction((txn) async {
+      for (int i = 0; i < count; i++) {
+        final category = categories[i % categories.length];
+        await txn.insert(
+          'notes',
+          Note(
+            title: '[$category] 더미 노트 ${i + 1}',
+            content: bodies[i % bodies.length],
+            createdAt: now
+                .subtract(Duration(hours: i * 2))
+                .toIso8601String(),
+          ).toMap(),
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+      }
+    });
+  }
 }
